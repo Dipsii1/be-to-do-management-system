@@ -1,14 +1,19 @@
 require('dotenv').config();
 
+// Import Module & Declare Variable
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Import DB Connection
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var taskRouter = require('./routes/task');
+var usertaskRouter = require('./routes/usertask');
 
+// Create Express App
 var app = express();
 
 // view engine setup
@@ -21,10 +26,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Define Route
 
-// catch 404 and forward to error handler
+// Greeting API
+app.use('/', indexRouter);
+// User API
+app.use('/users', usersRouter);
+// Task API
+app.use('/task', taskRouter);
+// UserTask API
+app.use('/usertask', usertaskRouter);
+
+// Handle Error
 app.use(function (req, res, next) {
   next(createError(404));
 });
