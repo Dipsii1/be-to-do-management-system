@@ -8,10 +8,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // Import DB Connection
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var taskRouter = require('./routes/task');
-var usertaskRouter = require('./routes/usertask');
+var userTaskRouter = require('./routes/usertask');
 
 // Create Express App
 var app = express();
@@ -27,15 +28,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Define Route
-
 // Greeting API
 app.use('/', indexRouter);
-// User API
+
+// Users API
 app.use('/users', usersRouter);
+
 // Task API
-app.use('/task', taskRouter);
-// UserTask API
-app.use('/usertask', usertaskRouter);
+app.use('/tasks', taskRouter);
+
+// User Task API
+app.use('/usertask', userTaskRouter);
 
 // Handle Error
 app.use(function (req, res, next) {
