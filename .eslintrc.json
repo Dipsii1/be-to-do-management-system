@@ -4,7 +4,9 @@
       "error",
       {
         "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
+        "varsIgnorePattern": "^_",
+        "react/prop-types": "off"
+        
       }
     ]
   }
