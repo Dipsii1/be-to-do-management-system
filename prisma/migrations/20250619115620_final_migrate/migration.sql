@@ -19,9 +19,10 @@ CREATE TABLE "Task" (
     "desc" TEXT NOT NULL,
     "priority" TEXT NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
-    "is_done" BOOLEAN NOT NULL,
-    "created_by" TEXT NOT NULL,
+    "status" TEXT NOT NULL,
+    "created_by" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_by" TEXT,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "deleted_at" TIMESTAMP(3),
     "is_deleted" BOOLEAN NOT NULL DEFAULT false,
@@ -37,6 +38,9 @@ CREATE TABLE "UserTask" (
 
     CONSTRAINT "UserTask_pkey" PRIMARY KEY ("user_id","task_id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
 ALTER TABLE "UserTask" ADD CONSTRAINT "UserTask_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
